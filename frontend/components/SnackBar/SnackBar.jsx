@@ -1,6 +1,3 @@
-// import { Alert, IconButton, Snackbar } from '@mui/material';
-// import CloseIcon from '@mui/icons-material/Close';
-
 import { Alert, Snackbar } from '@mui/material';
 
 import ALERT_COLORS from '@/constants/notification';
@@ -21,7 +18,14 @@ const SnackBar = (props) => {
         color={ALERT_COLORS[severity]}
         anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
       >
-        <Alert severity={severity} onClose={handleClose} variant="filled"  sx={{ width: '50%' }}>
+        <Alert 
+          severity={severity} 
+          onClose={handleClose} 
+          variant="outlined"  
+          
+          sx={{ width: '50%', color: "warning", background:'#300000'}}
+        
+        >
           {message}
         </Alert>
       </Snackbar>
