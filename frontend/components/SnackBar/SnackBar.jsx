@@ -13,7 +13,7 @@ const SnackBar = (props) => {
   return (
       <Snackbar
         open={open}
-        autoHideDuration={6000}
+        autoHideDuration={4000}
         onClose={handleClose}
         color={ALERT_COLORS[severity]}
         anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
@@ -21,10 +21,8 @@ const SnackBar = (props) => {
         <Alert 
           severity={severity} 
           onClose={handleClose} 
-          variant="outlined"  
-          
-          sx={{ width: '50%', color: "warning", background:'#300000'}}
-        
+          variant="outlined"     
+          sx={{ width: '30%', color: "warning", background:'#300000', borderRadius: '8px'}}
         >
           {message}
         </Alert>

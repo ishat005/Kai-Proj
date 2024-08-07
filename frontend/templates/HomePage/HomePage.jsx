@@ -5,21 +5,19 @@ import ToolsListingContainer from "@/components/ToolsListingContainer";
 
 import styles from "./styles";
 
-import { Snackbar } from "@mui/material";
-
-import { AuthContext } from "@/providers/GlobalProvider";
-import { useContext, useState } from 'react';
+import { useState } from 'react';
 import { auth } from '@/redux/store';
-import ALERT_COLORS from "@/constants/notification";
-
 
 const HomePage = (props) => {
-  const { data, loading, handleClose, message, severity } = props;
-  const { handleOpenSnackBar } = useContext(AuthContext);
+  const { data, loading } = props;
   const [open, SetOpen] = useState(true);
+  const createdTimestamp = auth.currentUser.metadata.creationTime;
+  const signInTimestamp  = auth.currentUser.metadata.lastSignInTime
+
+  console.log(createdTimestamp);
+  console.log(signInTimestamp);
 
   const renderTitle = () => {
-
     return (
       <Grid {...styles.titleGridProps}>
         <Typography {...styles.titleProps}>
@@ -37,14 +35,14 @@ const HomePage = (props) => {
                 icon={false}
                 action={<IconButton onClick={()=>(SetOpen(false))} sx={{color:'#404040'}}><CloseIcon></CloseIcon></IconButton>}
                 variant="outlined"
-                sx={{background: '#dfc5fe', border: '1.5px solid #6960Ec', width: '120%'}}
-          >
+                sx={{background: '#dfc5fe', border: '1.5px solid #6960Ec', width: '125%',  borderRadius: '6px'}}
+              >           
                 <Typography {...styles.loginGridProps}> 
-                    Login Successful!
+                    {createdTimestamp !== signInTimestamp ? 'Log In Successful!' : 'Sign Up Successful!'}
                     <Typography {...styles.loginSubtitleProps}> 
-                      👋Welcome Back!
+                        {createdTimestamp !== signInTimestamp ? '👋Welcome Back!' : '👋Welcome to KAI!'}
                     </Typography>
-                </Typography> 
+                </Typography>    
               </Alert>
             </Collapse>
         </Grid>

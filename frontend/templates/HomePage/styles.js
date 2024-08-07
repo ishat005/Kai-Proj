@@ -18,17 +18,6 @@ const styles = {
     alignItems: 'flex-start',
   },
 
-  loginGridProps:{
-    container: true,
-    item: true,
-    width: '100%',
-    flexDirection: 'column',
-    justifyContent: 'flex-end',
-    alignItems: 'flex-end',
-    fontWeight: 'bold',
-    color: '#6960Ec',
-  },
-
   titleProps: {
     fontFamily: 'Satoshi Bold',
     fontSize: '36px',
@@ -47,29 +36,20 @@ const styles = {
     color: (theme) => theme.palette.primary.main,
   },
 
-  loginSubtitleProps: {
-    color: 'black',
-    margin: 0
-  },
-
-  signupGridProps: {
+  loginGridProps:{
     container: true,
     item: true,
     width: '100%',
     flexDirection: 'column',
     justifyContent: 'flex-end',
     alignItems: 'flex-end',
-
     fontWeight: 'bold',
-    color: '#6b3dbf',
-    backgroundColor: '#6b3dbf',
-    margin: 0,
-    
+    color: '#6960Ec',
   },
 
-  signupSubtitleProps: {
+  loginSubtitleProps: {
     color: 'black',
-    margin: 0
+    margin: 0,
   },
 };
 
