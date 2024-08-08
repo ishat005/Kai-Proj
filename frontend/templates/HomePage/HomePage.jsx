@@ -5,44 +5,19 @@ import ToolsListingContainer from "@/components/ToolsListingContainer";
 
 import styles from "./styles";
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { auth } from '@/redux/store';
-import { firestore } from "../../../frontend/redux/store";
-import { getDocs, collection } from "firebase/firestore";
 
 const HomePage = (props) => {
   const { data, loading } = props;
   const [open, SetOpen] = useState(true);
   const createdTimestamp = auth.currentUser.metadata.creationTime;
-  const signInTimestamp  = auth.currentUser.metadata.lastSignInTime;
+  const signInTimestamp  = auth.currentUser.metadata.lastSignInTime
 
-  async function fetchDataFromFirestore(){
-    const querySnapshot = await getDocs(collection(firestore, 'users'));
-    const data = [];
-
-    querySnapshot.forEach((doc) => {
-      data.push({ id: doc.id, ...doc.data() });
-    })
-    return data;
-  }
-
+  console.log(createdTimestamp);
+  console.log(signInTimestamp);
 
   const renderTitle = () => {
-    const [userData, setUserData] = useState([]);
-
-    useEffect(() => {
-      async function fetchData() {
-        const data = await fetchDataFromFirestore();
-        setUserData(data);
-      }
-        fetchData();
-    }, [])
-
-    const retrievedName = '';
-    userData.map((user) => {
-      retrievedName = user.fullName;
-    })
-
     return (
       <Grid {...styles.titleGridProps}>
         <Typography {...styles.titleProps}>
@@ -65,7 +40,7 @@ const HomePage = (props) => {
                 <Typography {...styles.loginGridProps}> 
                     {createdTimestamp !== signInTimestamp ? 'Log In Successful!' : 'Sign Up Successful!'}
                     <Typography {...styles.loginSubtitleProps}> 
-                        {createdTimestamp !== signInTimestamp ? `👋Welcome Back! ${retrievedName}` : `👋Welcome to KAI! ${retrievedName}`}
+                        {createdTimestamp !== signInTimestamp ? '👋Welcome Back!' : '👋Welcome to KAI!'}
                     </Typography>
                 </Typography>    
               </Alert>
