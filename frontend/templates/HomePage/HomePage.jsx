@@ -28,7 +28,6 @@ const HomePage = (props) => {
     return data;
   }
 
-
   const renderTitle = () => {
     const [userData, setUserData] = useState([]);
     
