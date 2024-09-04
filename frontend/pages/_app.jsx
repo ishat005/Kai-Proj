@@ -9,6 +9,7 @@ import GlobalProvider from '@/providers/GlobalProvider';
 import theme from '@/theme/theme';
 
 import '@/styles/globals.css';
+import NetworkErrorProvider from '@/providers/NetworkErrorProvider';
 
 const App = ({ Component, pageProps }) => {
   const getLayout = Component.getLayout || ((page) => page);
@@ -17,12 +18,15 @@ const App = ({ Component, pageProps }) => {
   return (
     <ThemeProvider theme={theme}>
       <GlobalProvider>
-        <GoogleAnalytics
-          trackPageViews
-          gaMeasurementId={firebaseConfig.measurementId}
-        />
-        {getLayout(<Component {...pageProps} />, query)}
+        <NetworkErrorProvider>
+          <GoogleAnalytics
+            trackPageViews
+            gaMeasurementId={firebaseConfig.measurementId}
+          />
+          {getLayout(<Component {...pageProps} />, query)}
+        </NetworkErrorProvider>
       </GlobalProvider>
+
     </ThemeProvider>
   );
 };

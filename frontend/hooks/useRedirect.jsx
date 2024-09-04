@@ -41,6 +41,7 @@ const useRedirect = (firestore, functions, handleOpenSnackBar) => {
     const isAuthRoute = isAuthUrl || isRedirectRoute;
 
     // If a authUser is authed, set the currentUser in the store and redirect to home if on an auth route
+    
     if (auth.currentUser) {
       if (isRedirectRoute) {
         dispatch(setLoading(false));

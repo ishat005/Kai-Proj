@@ -125,6 +125,7 @@ const SignUpForm = (props) => {
         handleOpenSnackBar(
           ALERT_COLORS.ERROR,
           'Sign Up Failed! \nPlease try again',
+          true
         );
       }
 
@@ -132,6 +133,7 @@ const SignUpForm = (props) => {
         handleOpenSnackBar(
           ALERT_COLORS.ERROR,
           'Sign Up Failed! \nPlease try again',
+          true
         );
         
         setError({
@@ -146,6 +148,7 @@ const SignUpForm = (props) => {
         handleOpenSnackBar(
           ALERT_COLORS.ERROR,
           'Sign Up Failed! \nPlease try again',
+          true
         );
 
         setError({
@@ -168,7 +171,8 @@ const SignUpForm = (props) => {
         await signUp(email.value, password.value, fullName.value);
         handleOpenSnackBar(
           ALERT_COLORS.SUCCESS,
-          'Account created successfully'
+          'Account created successfully',
+          true
         );
 
         setEmail(email.value);

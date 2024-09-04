@@ -29,7 +29,7 @@ const PageNotFound = () => {
     return (
       <Grid {...pageNotFoundStyles.titleGridProps}>
         <Typography {...pageNotFoundStyles.subtitleProps}>
-          Lost in the Digital Cosmos? ☄️
+          404
         </Typography>
       </Grid>
     );
