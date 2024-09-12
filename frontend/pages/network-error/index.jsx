@@ -8,11 +8,6 @@ import errorIcon from "../../assets/svg/_WarningAmberOutlined.svg";
 import AppDisabled from "@/components/AppDisabled";
 import { useMediaQuery } from "@mui/material";
 
-const iconSize = "350px";
-const secondIconSize = "400px";
-const thirdIconSize = "180px";
-const errorIconSize = "2000px";
-
 const NetworkError = () => {
   const isTabletScreen = useMediaQuery((theme) =>
     theme.breakpoints.down("laptop")
@@ -34,6 +29,12 @@ const NetworkError = () => {
           sx={{
             textAlign: "center",
             backgroundColor: "white",
+            overflow: "hidden",
+            height: "100vh",
+            position: "fixed",
+            top: 0,
+            left: 0,
+            width: "100vw",
           }}
         >
           <Typography
@@ -48,6 +49,7 @@ const NetworkError = () => {
               position: "relative",
               bottom: "45px",
               fontFamily: "Ethnocentric Regular",
+              right: "40px",
             }}
           >
             <SvgIcon
@@ -74,7 +76,7 @@ const NetworkError = () => {
               fontSize: "18px",
               color: "#AD83FF",
               fontFamily: "Satoshi Bold",
-              marginLeft: "2rem",
+              marginLeft: "-2rem",
               paddingBottom: "2rem",
               position: "relative",
               bottom: "45px",
@@ -93,209 +95,78 @@ const NetworkError = () => {
             />
             AI teaching Assistant
           </Typography>
-        </Box>
 
-        <Box
-          sx={{
-            backgroundColor: "white",
-            height: "100vh",
-            height: "100vh",
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        >
           <SvgIcon
-            component={starIconOne}
-            viewBox="-160 2 40 390"
+            component={starIconThree}
+            viewBox="0 40 240 10"
             sx={{
-              width: iconSize,
-              height: iconSize,
-              transform: "translate(-2px, -2px)",
               position: "relative",
-              left: "160px",
-              bottom: "50px",
-
-              "@media (min-width: 1024px)": {
-                position: "relative",
-                left: "5%",
-                transform: "translate(-5%, 10%)",
-              },
-
-              "@media (min-width: 1440px)": {
-                position: "relative",
-                left: "11%",
-                transform: "translate(-15%, 10%)",
-              },
+              left: "240px",
+              top: "-20px",
+              width: "160px",
+              height: "160px",
             }}
           />
-          <Typography
-            variant="h3"
-            component="div"
-            align="center"
-            sx={{
-              color: "black",
-              fontWeight: "bold",
-              marginTop: "-23rem",
-              marginBottom: "1rem",
-              marginLeft: "200px",
-
-              "@media (min-width: 1024px)": {
-                position: "relative",
-                top: "90%",
-                left: "0%",
-                transform: "translate(-50%, -50%)",
-              },
-
-              "@media (min-width: 1440px)": {
-                position: "relative",
-                top: "15%",
-                left: "20%",
-                transform: "translate(-40%, -50%)",
-                marginLeft: "110px",
-              },
-            }}
-          >
+          <Box>
             <SvgIcon
               component={errorIcon}
-              viewBox="0 -170 30 370"
               sx={{
-                width: errorIconSize,
-                height: errorIconSize,
-
-                "@media (min-width: 1024px)": {
-                  position: "absolute",
-                  top: "-10%",
-                  left: "34%",
-                  transform: "translate(-45%, -50%)",
-                },
-
-                "@media (min-width: 1440px)": {
-                  position: "absolute",
-                  top: "70%",
-                  left: "30%",
-                  transform: "translate(-55%, -50%)",
-                },
+                width: "100px",
+                height: "100px",
+                marginTop: "-95px",
+                marginLeft: "1rem",
               }}
             />
-            Network Error
-            <SvgIcon
-              component={starIconTwo}
-              viewBox="70 -130 140 390"
+
+            <Typography
+              variant="h3"
+              component="div"
+              align="center"
               sx={{
-                width: secondIconSize,
-                height: secondIconSize,
+                color: "black",
+                fontWeight: "bold",
+                fontSize: "41px",
                 position: "relative",
-                right: "30px",
-                bottom: "10px",
-
-                "@media (min-width: 1024px)": {
-                  position: "relative",
-                  top: "25%",
-                  left: "60%",
-                  transform: "translate(10%, -100%)",
-                },
-
-                "@media (min-width: 1440px)": {
-                  position: "relative",
-                  top: "55%",
-                  left: "0%",
-                  transform: "translate(-10%, 5%)",
-                },
-              }}
-            />
-            <SvgIcon
-              component={starIconThree}
-              viewBox="0 40 240 10"
-              sx={{
-                width: thirdIconSize,
-                height: thirdIconSize,
-                position: "absolute",
-                top: "65%",
-                left: "69.5%",
-                transform: "translate(-50%, -50%)",
-
-                "@media (min-width: 1024px)": {
-                  position: "relative",
-                  top: "-55%",
-                  transform: "translate(-20%, -300%)",
-                },
-
-                "@media (min-width: 1440px)": {
-                  position: "relative",
-                  left: "-32%",
-                  transform: "translate(-50%, 50%)",
-                },
-              }}
-            />
-            <Typography
-              align="left"
-              sx={{
-                color: "black",
-                marginLeft: "-5rem",
-                marginTop: "1rem",
-
-                "@media (min-width: 1024px)": {
-                  position: "absolute",
-                  top: "10%",
-                  left: "0%",
-                  transform: "translate(20%, -50%)",
-                  height: "100vh",
-                  display: "flex",
-                  flexDirection: "column",
-                  justifyContent: "center",
-                  alignItems: "center",
-                },
-
-                "@media (min-width: 1440px)": {
-                  position: "absolute",
-                  top: "102.5%",
-                  left: "-10%",
-                  transform: "translate(20%, -50%)",
-                  height: "100vh",
-                  display: "flex",
-                  flexDirection: "column",
-                  justifyContent: "center",
-                  alignItems: "center",
-                },
+                bottom: "115px",
+                marginLeft: "4rem",
               }}
             >
-              Seems like there is a problem with your internet, try <br />
+              <SvgIcon
+                component={starIconOne}
+                viewBox="-60 -20 140 10"
+                sx={{
+                  position: "relative",
+                  right: "30px",
+                  bottom: "115px",
+                  width: "80px",
+                  height: "80px",
+                }}
+              />
+              Network Error
+              <SvgIcon
+                component={starIconTwo}
+                viewBox="70 -130 140 390"
+                sx={{
+                  position: "relative",
+                  left: "20px",
+                  top: "90px",
+                  width: "160px",
+                  height: "160px",
+                }}
+              />
+              <Typography
+                sx={{
+                  color: "black",
+                  fontSize: "20px",
+                  marginTop: "10px",
+                  marginRight: "4rem",
+                }}
+              >
+                <p>Seems like there is a problem with your internet, try</p>
+                <p>reconnecting and refresh the page to continue</p>
+              </Typography>
             </Typography>
-            <Typography
-              align="left"
-              sx={{
-                color: "black",
-                marginLeft: "-2rem",
-
-                "@media (min-width: 1024px)": {
-                  position: "absolute",
-                  top: "18%",
-                  left: "5%",
-                  transform: "translate(20%, -50%)",
-                  height: "100vh",
-                  display: "flex",
-                  flexDirection: "column",
-                  justifyContent: "center",
-                  alignItems: "center",
-                },
-
-                "@media (min-width: 1440px)": {
-                  position: "absolute",
-                  top: "115%",
-                  left: "-5%",
-                  transform: "translate(20%, -50%)",
-                  height: "100vh",
-                  display: "flex",
-                  flexDirection: "column",
-                  justifyContent: "center",
-                  alignItems: "center",
-                },
-              }}
-            >
-              reconnecting and refreshing the page.
-            </Typography>
-          </Typography>
+          </Box>
         </Box>
       </div>
     );
