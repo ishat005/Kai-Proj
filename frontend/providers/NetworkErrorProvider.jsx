@@ -5,6 +5,9 @@ function NetworkErrorProvider({ children }) {
   const [networkError, setNetworkErrorState] = useState(false);
 
   useEffect(() => {
+    if (typeof window === undefined) {
+      return null;
+    }
     const checkNetwork = async () => {
       console.log("Checking network...");
       try {
