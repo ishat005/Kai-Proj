@@ -7,6 +7,7 @@ import HomePage from '@/templates/HomePage';
 
 import { firestore } from '@/redux/store';
 import fetchTools from '@/redux/thunks/tools';
+import withLayoutRedirect from '@/hoc/onboarding/withLayoutRedirect';
 
 const Home = () => {
   const { data, loading, error } = useSelector((state) => state.tools);
@@ -25,8 +26,9 @@ const Home = () => {
 
 };
 
-Home.getLayout = function getLayout(page) {
-  return <MainAppLayout>{page}</MainAppLayout>;
-};
+// Home.getLayout = function getLayout(page) {
+//   return <MainAppLayout>{page}</MainAppLayout>;
+// };
 
-export default Home;
+// export default Home;
+export default withLayoutRedirect(Home);
