@@ -1,0 +1,117 @@
+const styles = {
+  mainContainer: {
+    width: "100%",
+    mb: 4,
+  },
+  title: {
+    mb: 1,
+    color: "text.primary",
+    marginTop: "25px",
+    marginLeft: "70px",
+  },
+  subtitle: {
+    color: "text.primary",
+    mb: 4,
+    marginLeft: "70px",
+  },
+  formSection: {
+    display: "flex",
+    gap: 2,
+    mb: 5,
+    alignItems: "center",
+    width: "26%",
+    margin: "auto",
+    position: "relative",
+    left: "57px",
+  },
+  fieldContainer: {
+    flex: 1,
+  },
+  socialLinksSection: {
+    gap: 5,
+    mb: 3,
+    alignItems: "center",
+    width: "26%",
+    margin: "auto",
+    position: "relative",
+    left: "57px",
+  },
+  socialLinkErrorMessage: {
+    mb: 2,
+  },
+  bioContainer: {
+    width: "26%",
+    margin: "auto",
+    position: "relative",
+    left: "57px",
+  },
+  bioTextField: {
+    marginTop: "2rem",
+    "& .MuiInputBase-root": {
+      borderRadius: "8px",
+      padding: "14px",
+      minHeight: "150px",
+    },
+    "& .MuiOutlinedInput-root": {
+      alignItems: "flex-start",
+      overflow: "visible",
+    },
+    "& .MuiFormHelperText-root": {
+      minHeight: "24px",
+      marginTop: "4px",
+      display: "flex",
+      justifyContent: "space-between",
+      alignItems: "center",
+    },
+  },
+  errorMessageBox: {
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
+    mt: 1,
+  },
+  errorMessage: {
+    maxWidth: "70%",
+    whiteSpace: "nowrap",
+    overflow: "hidden",
+    textOverflow: "ellipsis",
+  },
+  charCount: {
+    color: "text.secondary",
+    marginLeft: "auto",
+  },
+  generalErrorMessage: {
+    mb: 2,
+  },
+  submitButtonProps: {
+    type: "submit",
+    color: "purple",
+    inverted: true,
+    extraProps: {
+      padding: "2px",
+      height: { laptop: "54px", desktopMedium: "60px" },
+      width: "27%",
+      position: "relative",
+      left: "55px",
+      top: "10px",
+      marginLeft: "auto",
+      marginRight: "auto",
+    },
+    extraButtonProps: {
+      fontFamily: "Satoshi Bold",
+      fontSize: "16px",
+      px: 4,
+    },
+  },
+  typographyLabel: {
+    marginLeft: ".5rem",
+    marginTop: "1rem",
+    fontSize: "14px",
+    fontFamily: "Satoshi Bold",
+    color: "#D7D7D7",
+    fontWeight: 500,
+    mb: 1,
+  },
+};
+
+export default styles;

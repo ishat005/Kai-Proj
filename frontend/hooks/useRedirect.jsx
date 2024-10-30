@@ -1,16 +1,16 @@
-import { useEffect } from 'react';
+import { useEffect } from "react";
 
-import { applyActionCode } from 'firebase/auth';
-import { useRouter } from 'next/router';
-import { useDispatch, useSelector } from 'react-redux';
+import { applyActionCode } from "firebase/auth";
+import { useRouter } from "next/router";
+import { useDispatch, useSelector } from "react-redux";
 
-import { AUTH_MODES } from '@/constants/auth';
-import ALERT_COLORS from '@/constants/notification';
-import ROUTES from '@/constants/routes';
+import { AUTH_MODES } from "@/constants/auth";
+import ALERT_COLORS from "@/constants/notification";
+import ROUTES from "@/constants/routes";
 
-import { setEmailVerified, setLoading } from '@/redux/slices/authSlice';
-import { auth } from '@/redux/store';
-import fetchUserData from '@/redux/thunks/user';
+import { setEmailVerified, setLoading } from "@/redux/slices/authSlice";
+import { auth } from "@/redux/store";
+import fetchUserData from "@/redux/thunks/user";
 
 const redirectRegex = /\/redirect.*/;
 
@@ -26,7 +26,7 @@ const useRedirect = (firestore, functions, handleOpenSnackBar) => {
   };
 
   useEffect(() => {
-    if (typeof window === 'undefined') return;
+    if (typeof window === "undefined") return;
 
     // Check if the current route is an authentication route
     const isAuthUrl = [
@@ -41,7 +41,7 @@ const useRedirect = (firestore, functions, handleOpenSnackBar) => {
     const isAuthRoute = isAuthUrl || isRedirectRoute;
 
     // If a authUser is authed, set the currentUser in the store and redirect to home if on an auth route
-    
+
     if (auth.currentUser) {
       if (isRedirectRoute) {
         dispatch(setLoading(false));
@@ -64,7 +64,7 @@ const useRedirect = (firestore, functions, handleOpenSnackBar) => {
       }
 
       if (isAuthUrl) {
-        router.push(ROUTES.HOME);
+        router.push(ROUTES.ONBOARDING);
         return;
       }
       return;
@@ -84,9 +84,9 @@ const useRedirect = (firestore, functions, handleOpenSnackBar) => {
           await applyActionCode(auth, oobCode);
 
           dispatch(setEmailVerified(true));
-          router.push(`${ROUTES.HOME}`);
+          router.push(`${ROUTES.ONBOARDING}`);
         } catch (error) {
-          handleOpenSnackBar(ALERT_COLORS.ERROR, 'Unable to verify email');
+          handleOpenSnackBar(ALERT_COLORS.ERROR, "Unable to verify email");
           router.push(`${ROUTES.SIGNUP}`);
           throw new Error(error);
         }
@@ -101,7 +101,7 @@ const useRedirect = (firestore, functions, handleOpenSnackBar) => {
 
       if (mode === AUTH_MODES.VERIFY_EMAIL) {
         if (auth.currentUser?.emailVerified) {
-          router.push(ROUTES.HOME);
+          router.push(ROUTES.ONBOARDING);
           return;
         }
 

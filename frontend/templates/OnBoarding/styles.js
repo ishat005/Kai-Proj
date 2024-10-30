@@ -31,3 +31,5 @@ const styles = {
     fontFamily: "Satoshi",
   },
 };
+
+export default styles;

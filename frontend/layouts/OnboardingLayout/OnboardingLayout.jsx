@@ -6,7 +6,7 @@ import Loader from "@/components/Loader";
 import { useDispatch } from "react-redux";
 import { setLoading } from "@/redux/slices/authSlice";
 import { Head } from "next/head";
-import ProgressBarMenu from "../ProgressBarMenu/ProgressBarMenu";
+import ProgressBar from "@/components/Progressbar";
 import styles from "./styles";
 
 const OnboardingLayout = ({ children, currentStep }) => {
@@ -40,7 +40,7 @@ const OnboardingLayout = ({ children, currentStep }) => {
     <>
       {/* <Grid item xs={12} sx={styles.headerContainer}> */}
       <Grid item xs={12}>
-        <ProgressBarMenu activeStep={currentStep} />
+        <ProgressBar />
       </Grid>
       {/* <Grid item xs={12} sx={styles.contentContainer}> */}
       <Grid item xs={12}>

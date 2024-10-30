@@ -1,91 +1,118 @@
-import { useEffect, useState } from 'react';
+// import { useRouter } from "next/router";
+// import { useSelector } from "react-redux";
+// import { useState } from "react";
+// import MainAppLayout from "@/layouts/MainAppLayout";
+// import WelcomeScreen from "@/templates/OnBoarding/OnBoarding";
 
-import { useRouter } from 'next/router';
-import { useSelector } from 'react-redux';
+// const withLayoutRedirect = (PageComponent, props) => {
+//   // const currentStep = props.currentStep;
 
-import MainAppLayout from '@/layouts/MainAppLayout';
+//   return function WrappedComponent(props) {
+//     // console.log("Received currentStep:", currentStep);
+//     // console.log("Received currentStep:", props.currentStep);
 
-import AuthLayout from '@/layouts/AuthLayout';
+//     console.log("Received props:", props);
 
-import OnboardingLayout from '@/layouts/OnboardingLayout';
+//     const router = useRouter();
+//     const [onboardingStatus, setOnboardingStatus] = useState({
+//       isComplete: false,
+//       nextStep: null,
+//     });
 
-import ROUTES from '@/constants/routes';
+//     const component = props.component;
 
-const withLayoutRedirect = (PageComponent) => {
+//     if (!onboardingStatus.isComplete) {
+//       console.log("Current step:", currentStep);
+//       if (currentStep === 1) {
+//         console.log("Rendering WelcomeScreen");
+//         return <WelcomeScreen />;
+//       } else {
+//         console.log("Not rendering WelcomeScreen");
+//         const redirectRoutes = {
+//           2: router.PROFILE_SETUP,
+//           3: router.SYSTEM_CONFIGURATION,
+//           4: router.FINAL_STEPS,
+//           5: router.RESULT,
+//         };
+
+//         if (redirectRoutes[currentStep]) {
+//           router.push(redirectRoutes[currentStep]);
+//           if (currentStep === 4) {
+//             console.log("Onboarding completed");
+//             setOnboardingStatus({
+//               // isComplete: true, nextStep: null
+//               ...onboardingStatus,
+//               isComplete: true,
+//             });
+//           }
+//         }
+//       }
+//       return (
+//         <MainAppLayout>
+//           <PageComponent {...props} />
+//         </MainAppLayout>
+//       );
+//     }
+//   };
+
+//   return function EnhancedComponent() {
+//     return <WrappedComponent {...props} />;
+//   };
+// };
+// export default withLayoutRedirect;
+
+import { useRouter } from "next/router";
+import { useSelector } from "react-redux";
+import { useState } from "react";
+import MainAppLayout from "@/layouts/MainAppLayout";
+import WelcomeScreen from "@/templates/OnBoarding/OnBoarding";
+
+const withLayoutRedirect = (WrappedComponent) => {
+  // console.log("Received props:", props);
+
   return function WrappedComponent(props) {
+    const currentStep = props.currentStep || 1;
+    const component = props.component;
+
+    // const { currentStep, component: Component } = props;
+
     const router = useRouter();
-    const { data: user, loading } = useSelector((state) => state.user);
     const [onboardingStatus, setOnboardingStatus] = useState({
       isComplete: false,
       nextStep: null,
     });
 
-    useEffect(() => {
-      const evaluateOnboardingStatus = (onboarding) => {
-        if (!onboarding) return { isComplete: false, nextStep: 1 };
-        const isComplete = Object.values(onboarding).every((step) => step);
-        const nextStep =
-          Object.values(onboarding).findIndex((step) => !step) + 1;
-        return { isComplete, nextStep: isComplete ? null : nextStep };
-      };
+    if (!onboardingStatus.isComplete) {
+      console.log("Current step:", currentStep);
+      if (currentStep === 1) {
+        console.log("Rendering WelcomeScreen");
+        return <WelcomeScreen />;
+      } else {
+        console.log("Not rendering WelcomeScreen");
+        const redirectRoutes = {
+          2: router.PROFILE_SETUP,
+          3: router.SYSTEM_CONFIGURATION,
+          4: router.FINAL_STEPS,
+          5: router.RESULT,
+        };
 
-      if (!loading && user) {
-        const onboardingStep = evaluateOnboardingStatus(user.onboarding);
-        setOnboardingStatus(onboardingStep);
-
-        if (!onboardingStep.isComplete) {
-          const redirectRoutes = {
-            1: ROUTES.WELCOME_ONBOARDING,
-            2: ROUTES.PROFILE_SETUP,
-            3: ROUTES.SYSTEM_CONFIGURATION,
-            4: ROUTES.FINAL_STEPS,
-            5: ROUTES.RESULT,
-          };
-
-          if (redirectRoutes[onboardingStep.nextStep]) {
-            router.push(redirectRoutes[onboardingStep.nextStep]);
+        if (redirectRoutes[currentStep]) {
+          router.push(redirectRoutes[currentStep]);
+          if (currentStep === 4) {
+            console.log("Onboarding completed");
+            setOnboardingStatus({
+              ...onboardingStatus,
+              isComplete: true,
+            });
           }
         }
       }
-    }, [user, loading, router]);
-
-    const currentRoute = router.pathname;
-    const isNonAuthPage = [
-      ROUTES.SIGNIN,
-      ROUTES.SIGNUP,
-      ROUTES.PRIVACY,
-      ROUTES.TERMS,
-      ROUTES.PASSWORD_RESET,
-    ].includes(currentRoute);
-
-    // If this is a non-auth page, wrap around auth layout
-    if (isNonAuthPage) {
-      return <AuthLayout>{PageComponent}</AuthLayout>;
-    }
-
-    // If the user has not onboarded, render the onboarding page
-    if (!onboardingStatus.isComplete) {
       return (
-        <OnboardingLayout>
-          <onboardingPage {...props} />
-        </OnboardingLayout>
+        <MainAppLayout>
+          <WrappedComponent {...props} />
+        </MainAppLayout>
       );
     }
-
-    // // If the request is a landing page, render the main app layout
-    // if (isLandingPage) {
-    //   return (
-    //     <LandingPageLayout>
-    //       <PageComponent {...props} />
-    //     </LandingPageLayout>
-    //   );
-    // }
-
-    return (
-      <MainAppLayout>
-        <PageComponent {...props} />
-      </MainAppLayout>
-    );
   };
 };
 

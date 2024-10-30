@@ -1,6 +1,6 @@
 import React from 'react'
 
-const ProgressBarMenu = ({ activeStep }) => {
+const ProgressBarMenu = () => {
   return (
     <div>
       ProgressBar
