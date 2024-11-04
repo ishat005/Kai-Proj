@@ -8,7 +8,9 @@ const styles = {
     rowGap: 2,
     px: { laptop: 4, desktop: 5, desktopMedium: 6 },
     py: { laptop: 1, desktop: 1.5, desktopMedium: 2 },
-    marginTop: "80px",
+    marginTop: "-210px",
+    height: "100vh",
+    width: "100%",
   },
 
   headingProps: {

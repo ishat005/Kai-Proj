@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React from "react";
 import {
   Menu,
   MenuItem,
@@ -9,36 +9,49 @@ import {
   Button,
 } from "@mui/material";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
-
-import { Circle, Check } from "@mui/icons-material";
-
+import { Circle } from "@mui/icons-material";
 import CheckCircleTwoToneIcon from "@mui/icons-material/CheckCircleTwoTone";
 import RadioButtonUncheckedIcon from "@mui/icons-material/RadioButtonUnchecked";
 
-const TickIcon = () => {
-  return (
-    <Circle
-      sx={{
-        fontSize: 17,
-        color: " #444154",
-        border: "1px solid #8065FF",
-        borderRadius: "50%",
-        height: 21,
-        width: 21,
-      }}
-    >
-      <Check sx={{ fontSize: 18, color: "white", height: 21, width: 21 }} />
-    </Circle>
-  );
+const TickIcon = ({ index, currentStep }) => {
+  if (index < currentStep) {
+    return (
+      <>
+        <svg
+          width="26"
+          height="26"
+          viewBox="0 0 27 26"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <circle
+            cx="12.3"
+            cy="12.5"
+            r="11.5"
+            fill="#8065FF"
+            stroke="#FFFFFF"
+            strokeWidth="2"
+          />
+          <path
+            d="M7 12.5l3.5 3.5 6.5-6.5"
+            stroke="#FFFFFF"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+        </svg>
+      </>
+    );
+  }
 };
 
-const ProgressBar = () => {
-  const [anchorEl, setAnchorEl] = useState(null);
+const ProgressBar = ({ currentStep, theme = "dark" }) => {
+  const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
-  const lastStepRef = useRef(null);
+  const lastStepRef = React.useRef(null);
 
   const handleClick = (event) => {
-    setAnchorEl(lastStepRef.current);
+    setAnchorEl(event.currentTarget);
   };
 
   const handleClose = () => {
@@ -46,7 +59,18 @@ const ProgressBar = () => {
   };
 
   return (
-    <div>
+    <div
+      style={{
+        width: "650px",
+        height: "55px",
+        border: "1px solid #3D3F4E",
+        borderRadius: "10px",
+        padding: "12px 16px 12px 16px",
+        position: "relative",
+        left: "55px",
+        borderImage: `linear-gradient(-90deg, #3D3F4E, #8653FF) 1`,
+      }}
+    >
       <Stepper
         orientation="horizontal"
         connector={
@@ -54,27 +78,43 @@ const ProgressBar = () => {
             style={{
               width: 150,
               height: 8,
-              backgroundColor: "#ccc",
               borderRadius: 5,
               marginLeft: "-10px",
-              backgroundColor: "#444154",
+              backgroundColor: theme === "dark" ? "#444154" : "#D4D4D7",
             }}
           />
         }
-        style={{ position: "relative", left: "55px" }}
+        style={{ position: "relative", left: "5px" }}
       >
-        <Step>
-          <StepLabel StepIconComponent={TickIcon}></StepLabel>
-        </Step>
-        <Step>
-          <StepLabel StepIconComponent={TickIcon}></StepLabel>
-        </Step>
-        <Step>
-          <StepLabel StepIconComponent={TickIcon}></StepLabel>
-        </Step>
-        <Step ref={lastStepRef}>
-          <StepLabel StepIconComponent={TickIcon}></StepLabel>
-        </Step>
+        {Array.from({ length: 4 }, (_, index) => (
+          <Step key={index}>
+            <StepLabel
+              StepIconComponent={
+                index === currentStep
+                  ? () => (
+                      <Circle
+                        sx={{
+                          stroke: "#8065FF",
+                          strokeWidth: 2,
+                          fill: theme === "dark" ? "#444154" : "#B4B4B4",
+                        }}
+                      />
+                    )
+                  : index < currentStep
+                  ? () => <TickIcon index={index} currentStep={currentStep} />
+                  : () => (
+                      <Circle
+                        sx={{
+                          fill: theme === "dark" ? "#656277" : "#D6D6D6",
+                          strokeWidth: 2,
+                          stroke: theme === "dark" ? "#444154" : "#B4B4B4",
+                        }}
+                      />
+                    )
+              }
+            ></StepLabel>
+          </Step>
+        ))}
         <Button
           aria-controls="custom-menu"
           aria-haspopup="true"
@@ -96,16 +136,30 @@ const ProgressBar = () => {
         }}
         sx={{
           position: "absolute",
-          top: 40,
-          left: -550,
+          top: 10,
+          left: -574,
+
+          "& .MuiMenuItem-root": {
+            // backgroundColor: "#181A20",
+            backgroundColor: theme === "dark" ? "#181A20" : "#FFFFFF",
+          },
 
           "& .MuiPaper-root.MuiMenu-paper.MuiPaper-elevation.MuiPaper-rounded.MuiPaper-elevation8.MuiPopover-paper.css-nytw2n-MuiPaper-root-MuiMenu-paper-MuiPopover-paper":
             {
-              width: "22%",
+              width: "21.6%",
+              borderRadius: "10px",
+              border: "1px solid",
+              borderImage: `linear-gradient(-90deg, #3D3F4E, #8653FF) 1`,
             },
         }}
       >
-        <MenuItem onClick={handleClose}>
+        <MenuItem
+          onClick={handleClose}
+          sx={{
+            backgroundColor: theme === "dark" ? "#181A20" : "#FFFFFF",
+            marginTop: "-10px",
+          }}
+        >
           <Checkbox
             icon={
               <RadioButtonUncheckedIcon
@@ -129,6 +183,7 @@ const ProgressBar = () => {
                 }}
               />
             }
+            checked={currentStep > 0}
             sx={{
               marginRight: "20px",
             }}
@@ -136,7 +191,7 @@ const ProgressBar = () => {
           Welcome
         </MenuItem>
 
-        <MenuItem onClick={handleClose}>
+        <MenuItem onClick={handleClose} sx={{ borderTop: "1px solid #3D3F4E" }}>
           <Checkbox
             icon={
               <RadioButtonUncheckedIcon
@@ -160,6 +215,7 @@ const ProgressBar = () => {
                 }}
               />
             }
+            checked={currentStep > 1}
             sx={{
               marginRight: "20px",
             }}
@@ -167,7 +223,7 @@ const ProgressBar = () => {
           Profile Setup
         </MenuItem>
 
-        <MenuItem onClick={handleClose}>
+        <MenuItem onClick={handleClose} sx={{ borderTop: "1px solid #3D3F4E" }}>
           <Checkbox
             icon={
               <RadioButtonUncheckedIcon
@@ -175,8 +231,8 @@ const ProgressBar = () => {
                   borderRadius: "50%",
                   height: "30px",
                   width: "30px",
-                  background: "#444154",
-                  color: "#8065FF",
+                  background: theme === "dark" ? "#444154" : "#D6D6D6",
+                  color: theme === "dark" ? "#8065FF" : "#B4B4B4",
                 }}
               />
             }
@@ -191,6 +247,7 @@ const ProgressBar = () => {
                 }}
               />
             }
+            checked={currentStep > 2}
             sx={{
               marginRight: "20px",
             }}
@@ -198,7 +255,14 @@ const ProgressBar = () => {
           System Configurations
         </MenuItem>
 
-        <MenuItem onClick={handleClose}>
+        <MenuItem
+          onClick={handleClose}
+          sx={{
+            backgroundColor: "#181A20",
+            marginBottom: "-10px",
+            borderTop: "1px solid #3D3F4E",
+          }}
+        >
           <Checkbox
             icon={
               <RadioButtonUncheckedIcon
@@ -206,8 +270,8 @@ const ProgressBar = () => {
                   borderRadius: "50%",
                   height: "30px",
                   width: "30px",
-                  background: "#444154",
-                  color: "#8065FF",
+                  background: theme === "dark" ? "#444154" : "#D6D6D6",
+                  color: theme === "dark" ? "#8065FF" : "#B4B4B4",
                 }}
               />
             }
@@ -222,6 +286,7 @@ const ProgressBar = () => {
                 }}
               />
             }
+            checked={currentStep > 3}
             sx={{
               marginRight: "20px",
             }}

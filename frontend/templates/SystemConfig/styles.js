@@ -8,7 +8,8 @@ const styles = {
     rowGap: 2,
     px: { laptop: 4, desktop: 5, desktopMedium: 6 },
     py: { laptop: 1, desktop: 1.5, desktopMedium: 2 },
-    marginTop: "135px",
+    height: "100vh",
+    width: "100%",
   },
 
   headingProps: {
@@ -16,7 +17,7 @@ const styles = {
     fontSize: "22px",
     color: "white",
     textAlign: "center",
-    marginTop: "35px",
+    marginTop: "100px",
     marginLeft: "100px",
   },
 
@@ -54,9 +55,12 @@ const styles = {
     gap: "10px",
     border: "none",
     cursor: "pointer",
-    width: "645px",
+    width: "720px",
     textAlign: "center",
-    marginLeft: "80px",
+    // marginLeft: "80px",
+    position: "absolute",
+    left: "50%",
+    transform: "translateX(-50%)",
   },
 
   spanColorParagraph: {

@@ -2,6 +2,10 @@ const styles = {
   mainContainer: {
     width: "100%",
     mb: 4,
+    // marginTop: "-210px",
+    // height: "100vh",
+    marginTop: "0px",
+    // minHeight: "100vh",
   },
   title: {
     mb: 1,
@@ -50,7 +54,7 @@ const styles = {
     "& .MuiInputBase-root": {
       borderRadius: "8px",
       padding: "14px",
-      minHeight: "150px",
+      minHeight: "100px",
     },
     "& .MuiOutlinedInput-root": {
       alignItems: "flex-start",
@@ -105,12 +109,28 @@ const styles = {
   },
   typographyLabel: {
     marginLeft: ".5rem",
-    marginTop: "1rem",
+    marginTop: "0.5rem",
     fontSize: "14px",
     fontFamily: "Satoshi Bold",
     color: "#D7D7D7",
     fontWeight: 500,
     mb: 1,
+  },
+  buttonProps: {
+    type: "submit",
+    backgroundColor: "#8653FF",
+    color: "white",
+    fontFamily: "Satoshi Bold",
+    fontSize: "16px",
+    borderRadius: "26.89px",
+    marginTop: "25px",
+    marginLeft: "100px",
+    width: "27%",
+    padding: "17px",
+    gap: "10px",
+    border: "none",
+    cursor: "pointer",
+    textAlign: "center",
   },
 };
 

@@ -13,8 +13,21 @@ import styles from "./styles";
 
 import ProgressBar from "@/components/Progressbar";
 
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+
 const SystemConfiguration = ({ setCurrentStep }) => {
   const [theme, setTheme] = useState("light");
+  const bodyStyle = {
+    body: {
+      backgroundColor: theme === "dark" ? "#292B2F" : "#fff",
+    },
+  };
+
+  const themeMode = createTheme({
+    palette: {
+      mode: theme,
+    },
+  });
 
   const handleThemeChange = () => {
     setTheme(theme === "light" ? "dark" : "light");
@@ -24,102 +37,160 @@ const SystemConfiguration = ({ setCurrentStep }) => {
     setCurrentStep(4);
   };
 
+  const gridStyles = { ...styles.mainGridProps, ...bodyStyle.body };
+
   return (
-    <Grid {...styles.mainGridProps}>
-      <ProgressBar />
-      <Typography variant="h2" style={{ ...styles.headingProps }}>
-        <h1>System Configurations</h1>
-      </Typography>
+    <ThemeProvider theme={themeMode}>
+      <Grid sx={gridStyles}>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            marginRight: "70px",
+            position: "relative",
+            top: "50px",
+          }}
+        >
+          <ProgressBar currentStep={2} theme={theme} />
+        </div>
+        <Typography
+          variant="h2"
+          style={{
+            ...styles.headingProps,
+            color: theme === "light" ? "#000000" : styles.headingProps.color,
+          }}
+        >
+          <h1>System Configurations</h1>
+        </Typography>
 
-      <Typography style={{ ...styles.subHeadingProps }}>
-        We need some permissions to get you started
-      </Typography>
+        <Typography
+          style={{
+            ...styles.subHeadingProps,
+            color: theme === "light" ? "#000000" : styles.headingProps.color,
+          }}
+        >
+          We need some permissions to get you started
+        </Typography>
 
-      <div style={{ display: "block", margin: "auto" }}>
-        <Table sx={{ marginTop: "50px", position: "relative", left: "20px" }}>
-          <TableBody>
-            <TableRow>
-              <TableCell sx={{ paddingRight: "275px" }}>
-                Enable Email Notifications
-              </TableCell>
-              <TableCell>
-                <Switch
+        <div style={{ display: "block", margin: "auto", width: "30%" }}>
+          <Table sx={{ marginTop: "50px", position: "relative", left: "50px" }}>
+            <TableBody>
+              <TableRow>
+                <TableCell
                   sx={{
-                    "& .MuiSwitch-switchBase.Mui-checked": {
-                      color: "#8653FF",
-                    },
-                    "& .MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track": {
-                      backgroundColor: "#8653FF",
-                    },
+                    color: theme === "light" ? "#000000" : "#FFFFFF",
+                    paddingRight: "110px",
+                    fontWeight: "bold",
+                    fontSize: "20px",
                   }}
-                />
-              </TableCell>
-            </TableRow>
+                >
+                  Enable Email Notifications
+                </TableCell>
+                <TableCell>
+                  <Switch
+                    sx={{
+                      "& .MuiSwitch-switchBase.Mui-checked": {
+                        color: "#8653FF",
+                      },
+                      "& .MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track":
+                        {
+                          backgroundColor: "#8653FF",
+                        },
+                    }}
+                  />
+                </TableCell>
+              </TableRow>
 
-            <TableRow>
-              <TableCell sx={{ paddingRight: "275px" }}>
-                Enable Push Notifications
-              </TableCell>
-              <TableCell>
-                <Switch
+              <TableRow>
+                <TableCell
                   sx={{
-                    "& .MuiSwitch-switchBase.Mui-checked": {
-                      color: "#8653FF",
-                    },
-                    "& .MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track": {
-                      backgroundColor: "#8653FF",
-                    },
+                    color: theme === "light" ? "#000000" : "#FFFFFF",
+                    paddingRight: "110px",
+                    fontWeight: "bold",
+                    fontSize: "20px",
                   }}
-                />
-              </TableCell>
-            </TableRow>
+                >
+                  Enable Push Notifications
+                </TableCell>
+                <TableCell>
+                  <Switch
+                    sx={{
+                      "& .MuiSwitch-switchBase.Mui-checked": {
+                        color: "#8653FF",
+                      },
+                      "& .MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track":
+                        {
+                          backgroundColor: "#8653FF",
+                        },
+                    }}
+                  />
+                </TableCell>
+              </TableRow>
 
-            <TableRow>
-              <TableCell sx={{ paddingRight: "275px" }}>
-                Enable Reminders
-              </TableCell>
-              <TableCell>
-                <Switch
+              <TableRow>
+                <TableCell
                   sx={{
-                    "& .MuiSwitch-switchBase.Mui-checked": {
-                      color: "#8653FF",
-                    },
-                    "& .MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track": {
-                      backgroundColor: "#8653FF",
-                    },
+                    color: theme === "light" ? "#000000" : "#FFFFFF",
+                    paddingRight: "110px",
+                    fontWeight: "bold",
+                    fontSize: "20px",
                   }}
-                />
-              </TableCell>
-            </TableRow>
+                >
+                  Enable Reminders
+                </TableCell>
+                <TableCell>
+                  <Switch
+                    sx={{
+                      "& .MuiSwitch-switchBase.Mui-checked": {
+                        color: "#8653FF",
+                      },
+                      "& .MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track":
+                        {
+                          backgroundColor: "#8653FF",
+                        },
+                    }}
+                  />
+                </TableCell>
+              </TableRow>
 
-            <TableRow>
-              <TableCell sx={{ borderBottom: "none", paddingRight: "275px" }}>
-                Theme Selection
-              </TableCell>
-              <TableCell sx={{ borderBottom: "none" }}>
-                <Switch
-                  checked={theme === "dark"}
-                  onChange={handleThemeChange}
-                  icon={<LightMode />}
-                  checkedIcon={<DarkMode />}
+              <TableRow>
+                <TableCell
                   sx={{
-                    "& .MuiSwitch-switchBase.Mui-checked": {
-                      color: "#8653FF",
-                    },
-                    "& .MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track": {
-                      backgroundColor: "#8653FF",
-                    },
+                    color: theme === "light" ? "#000000" : "#FFFFFF",
+                    paddingRight: "110px",
+                    fontWeight: "bold",
+                    fontSize: "20px",
+                    borderBottom: "none",
                   }}
-                />
-              </TableCell>
-            </TableRow>
-          </TableBody>
-        </Table>
-      </div>
-      <button style={{ ...styles.buttonProps }} onClick={handleClick}>
-        Finish
-      </button>
-    </Grid>
+                >
+                  Theme Selection
+                </TableCell>
+                <TableCell sx={{ borderBottom: "none" }}>
+                  <Switch
+                    checked={theme === "dark"}
+                    onChange={handleThemeChange}
+                    icon={<LightMode />}
+                    checkedIcon={<DarkMode />}
+                    sx={{
+                      "& .MuiSwitch-switchBase.Mui-checked": {
+                        color: "#8653FF",
+                      },
+                      "& .MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track":
+                        {
+                          backgroundColor: "#8653FF",
+                        },
+                    }}
+                  />
+                </TableCell>
+              </TableRow>
+            </TableBody>
+          </Table>
+        </div>
+        <button style={{ ...styles.buttonProps }} onClick={handleClick}>
+          Finish
+        </button>
+      </Grid>
+    </ThemeProvider>
   );
 };
 

@@ -23,7 +23,7 @@ const FinalSteps = ({ setCurrentStep }) => {
 
   return (
     <Grid {...styles.mainGridProps}>
-      <ProgressBar />
+      <ProgressBar currentStep={3} />
       <Typography variant="h2" style={{ ...styles.headingProps }}>
         <h1>Final Steps</h1>
       </Typography>
@@ -60,6 +60,7 @@ const FinalSteps = ({ setCurrentStep }) => {
                       }}
                     />
                   }
+                  checked={true}
                   sx={{
                     marginRight: "20px",
                   }}
@@ -93,6 +94,7 @@ const FinalSteps = ({ setCurrentStep }) => {
                       }}
                     />
                   }
+                  checked={true}
                   sx={{
                     marginRight: "20px",
                   }}
@@ -126,6 +128,7 @@ const FinalSteps = ({ setCurrentStep }) => {
                       }}
                     />
                   }
+                  checked={true}
                   sx={{
                     marginRight: "20px",
                   }}
